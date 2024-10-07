@@ -1,0 +1,29 @@
+# Node modules are not needed in the Docker image since dependencies are installed during the build
+node_modules
+npm-debug.log
+
+# Git directories and files
+.git
+.gitignore
+
+# Local environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build output from local development (not needed in Docker build context)
+build
+
+# Dockerfile itself, if you're building from a different context
+Dockerfile
+.dockerignore
+
+# MacOS files
+.DS_Store
+
+# Other local IDE or editor directories
+.vscode
+.idea
+*.sublime-workspace
+*.sublime-project

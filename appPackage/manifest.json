@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "ef84b42c-fb88-4c72-ac6b-5a901529e20c",
+  "packageName": "com.contoso.teamsauthsso",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Tab Auth SSO Org",
+    "full": "Tab Auth SSO org"
+  },
+  "description": {
+    "short": "Tab Auth SSO app",
+    "full": "This sample shows sso authentication for tab."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "staticTabs": [
+    {
+      "entityId": "auth",
+      "name": "Auth",
+      "contentUrl": "https://ahbyo.au.ngrok.io/ssoDemo/?inTeams=true",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://ahbyo.au.ngrok.io/configure/?inTeams=true",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "ahbyo.au.ngrok.io"
+  ],
+  "webApplicationInfo": {
+    "id": "489ab150-7e03-4b49-81ec-7635f522d0d8",
+    "resource": "api://ahbyo.au.ngrok.io/489ab150-7e03-4b49-81ec-7635f522d0d8"
+  }
+}

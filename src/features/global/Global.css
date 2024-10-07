@@ -1,0 +1,39 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Oswald&display=swap');
+@import url('https://fonts.cdnfonts.com/css/sega-logo-font');
+
+* {
+  font-family: "Oswald", sans-serif !important;
+}
+
+.sega-font {
+  font-family: 'SEGA LOGO FONT', sans-serif;
+}
+
+
+
+/* Colors */
+:root {
+  --background1-color: rgb(255, 255, 255);
+  --background2-color: rgb(33, 33, 33);
+  --background3-color: rgb(255, 255, 255);
+  --border-color: rgb(230, 230, 230);
+  --primary-color : rgb(200, 200, 200); /* Define your color variable */
+  --secondary-color : rgb(255, 218, 23); /* Define your color variable */
+  --ok-color: rgb(117, 232, 153);
+  --confirmed1-color: rgb(255, 218, 23, 0.1);
+  --confirmed2-color: rgb(255, 218, 23, 0.05);
+  --no-color: rgb(250, 102, 107);
+  --primary-text-color: rgb(33, 33, 33);
+}
+
+
+
+/* Sizes */
+:root {
+  --icon-size: 30px;
+  --icon-size-small: 20px;
+  --height-main: 91vh;
+  --width-navigation: 4vw;
+  --width-main: 96vw;
+}

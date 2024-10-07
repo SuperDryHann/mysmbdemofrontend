@@ -1,0 +1,241 @@
+/* Remove default margins and paddings */
+html, body {
+    margin: 0;
+    padding: 0;
+}
+  
+  /* Set parent heights and widths */
+html, body, #root {
+    height: 100%;
+    width: 100%;
+}
+  
+
+
+/* App container */
+/* App container fills the parent */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto; /* Center horizontally */
+
+}
+
+
+
+/* Chat log */
+/* Chat log fills available space */
+.chat-log {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+}
+
+.chat-log-narrow {
+    width: 70%;
+    margin: 0 auto; /* Center the chat-log-narrow within its parent */
+    flex: none;     /* Prevent it from stretching */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+  
+.user-message-container {
+    justify-content: flex-end; /* Align to the right */
+    display: flex;
+    width: 100%;
+    /* Add padding inside the container */
+}
+  
+.bot-message-container {
+    justify-content: flex-start; /* Align to the left */
+    display: flex;
+    width: 100%;
+}
+    
+/* User messages */
+.user-message {
+    background-color: #f6f3eb;
+    max-width: 40%;
+    padding: 0 20px;
+    border-radius: 20px;
+    text-align: left;
+}
+  
+/* Bot messages */
+.bot-message {
+    background-color: transparent; /* Transparent background */
+    width: auto;                   /* Auto width */
+    text-align: left;
+}
+
+/* Divider styling */
+.divider {
+    margin: 10px 0;
+    border: none;
+    border-top: 1px solid rgb(230, 230, 230);
+  }
+  
+/* List styling */
+.reference {
+    list-style-type: none; /* Remove default bullets */
+    padding-left: 0;       /* Remove default padding */
+    margin: 0;
+}
+  
+.reference li {
+    margin-bottom: 5px; /* Space between list items */
+}
+  
+.reference-button {
+    background: none;        /* No background */
+    border: none;
+    border-radius: 10px;     /* Rounded corners */
+    color: rgb(9, 52, 153);   /* Text color */
+    text-align: left;        /* Align text to the left */
+    padding: 0 10px;
+    font: inherit;           /* Inherit font styles */
+    font-style: italic;
+    font-size: 14px;      /* Make text italic */
+    cursor: pointer;         /* Pointer cursor on hover */
+}
+  
+.reference-button sup {
+    margin-right: 3px; /* Space between superscript and text */
+}
+  
+.reference-button:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Underline text on hover */
+}
+
+.reference-item {
+    margin-bottom: 5px; /* Space between list items */
+  }
+  
+  /* Reference button container */
+  .reference-button-container {
+    position: relative; /* Needed for positioning the tooltip */
+    display: inline-block;
+  }
+  
+/* Tooltip styling */
+.tooltip {
+    visibility: hidden;
+    width: 30vw; /* Adjust the width as needed */
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    text-align: left;
+    padding: 10px;
+    border-radius: 20px;
+    position: absolute;
+    z-index: 1;
+  
+    /* Positioning */
+    top: 100%;                /* Position the tooltip below the button */
+    left: 0;                  /* Align the tooltip's left edge with the button's left edge */
+    margin-top: 10px;         /* Gap between the button and the tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+  
+    /* Text styling */
+    font-size: 14px;
+    line-height: 1.4;
+    white-space: normal;      /* Allow text to wrap */
+  }
+  
+  /* Show the tooltip when hovering over the container */
+  .reference-button-container:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+/* Avatar image styling */
+.avatar {
+    width: 40px;        /* Adjust the size as needed */
+    height: 40px;
+    border-radius: 50%; /* Make the image circular */
+    margin-right: 20px; /* Space between avatar and message */
+}
+  
+  
+
+
+/* Message input */
+/* Message input stays at the bottom */
+.message-input {
+    width: 70%;
+    margin: 0 auto;
+    padding: 5px 10px;
+    display: flex;
+    background-color: #f6f3eb;
+    border-radius: 20px; /* Rounded corners */
+}
+  
+/* Input and button styles */
+.message-input input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    color: #000;
+}
+  
+.message-input input::placeholder {
+    color: #888; /* Placeholder text color */
+}
+  
+.message-input button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    font-size: 16px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    color: #000;
+    font-weight: bold;
+}
+  
+.message-input button:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* Slight background on hover */
+}
+
+
+
+/* Loading */
+.loading {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #a5a5a5; /* Dark grey text */
+    position: relative;
+    overflow: hidden; /* Hide overflow to keep the animation within the text */
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -20%; /* Start the gradient off-screen */
+    width: 70%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, transparent 80%);
+    transform: translateX(0%);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    from {
+        transform: translateX(-100%);
+
+    }
+    to {
+        transform: translateX(100%); /* Move the gradient across the text */
+    }
+}
+  
