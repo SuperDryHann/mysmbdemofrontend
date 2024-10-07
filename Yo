@@ -1,9 +1,0 @@
-REACT_APP_FRONTEND_URL=http://localhost:3000
-REACT_APP_BACKEND_URL=https://mysmbdemobackend-bsbkhzhedgcmdydy.australiaeast-01.azurewebsites.net
-REACT_APP_BACKEND_URL_WS=wss://mysmbdemobackend-bsbkhzhedgcmdydy.australiaeast-01.azurewebsites.net
-REACT_APP_SCOPE=offline_access openid accounting.transactions accounting.settings
-REACT_APP_AZURE_B2C_CLIENT_ID=1c4ab0a2-4f93-4dbe-b017-1d8924a25887
-REACT_APP_AZURE_B2C_CLIENT_SECRET=
-REACT_APP_AZIRE_B2C_TENANT_NAME=ahsuspensequery
-REACT_APP_AZURE_B2C_POLICY_NAME=B2C_1_signupsignin
-REACT_APP_AZURE_B2C_SCOPE=https://ahsuspensequery.onmicrosoft.com/1c4ab0a2-4f93-4dbe-b017-1d8924a25887/Api.ReadWrite.All

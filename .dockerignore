@@ -27,3 +27,4 @@ Dockerfile
 .idea
 *.sublime-workspace
 *.sublime-project
+.devcontainer
