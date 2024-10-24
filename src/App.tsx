@@ -27,10 +27,6 @@ function App() {
   setGlobalLoading
 } = useContext(GlobalContext);
 
-const handleClose = () => {
-  setGlobalLoading(false);
-};
-
   return (
     <div className="App">
       <Grid container sx={{height: '100vh', width: '100vw', backgroundColor: 'var(--background1-color)'}}>
@@ -54,7 +50,6 @@ const handleClose = () => {
         <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={globalLoading}
-        onClick={handleClose}
         >
           <CircularProgress color="inherit" />
         </Backdrop>
