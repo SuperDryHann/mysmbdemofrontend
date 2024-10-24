@@ -1,0 +1,85 @@
+@import url('../global/Global.css');
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* App container with grid layout */
+.navigation {
+  display: grid;
+  grid-template-rows: var(--height-appbar) 1fr;
+  grid-template-columns: var(--width-sidebar) 1fr;
+  grid-template-areas: 
+    "sidebar-header appbar"
+    "sidebar content-shell";
+  height: 100vh;
+  width: 100vw;
+  background-image: url('../../../public/background1.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.navigation::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.3); /* Adjust the color and opacity */
+  z-index: 1;
+}
+
+.navigation > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* AppBar styles */
+.appbar {
+  grid-area: appbar;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 20px;
+  font-size: 1.5em;
+}
+
+/* Sidebar styles */
+.sidebar-header {
+  grid-area: sidebar-header;
+  background-color: var(--background2-color);
+  border-right: 1px solid var(--border-color);
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: var(--background2-color);
+  display: flex;
+  align-items: flex-end;
+  padding: 20px 0;
+  border-right: 1px solid var(--border-color);
+}
+
+/* Main content styles */
+.content-shell {
+  grid-area: content-shell;
+  display: flex;
+  overflow-y: auto;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.content {
+  width: 95%;
+  height: 96%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+

@@ -11,18 +11,104 @@ import Divider from '@mui/material/Divider';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import IconButton from '@mui/material/IconButton';
 
-import {useState, useContext} from 'react';
+import {
+  useState, 
+  useContext
+} from 'react';
 import KnowledgeBaseContext from './KnowledgeBaseContext';
-import {KnowledgeBaseFile} from './KnowledgeBaseInterface';
+import {
+  KnowledgeBaseFile,
+  Url
+} from './KnowledgeBaseInterface';
 import '../global/Global.css';
 import useAxiosToBackend from '../auth/useAxiosToBackend';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
-import axios from 'axios';
-import { setRef } from '@mui/material';
+import './KnowledgeBase.css';
+import GlobalContext from '../global/GlobalContext';
+import { name } from '@azure/msal-browser/dist/packageMetadata';
+import RemoveCircleOutlineRoundedIcon from '@mui/icons-material/RemoveCircleOutlineRounded';
+import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
+import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
+import TestButton from '../../TestButton';
+import { stat } from 'fs';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import { time } from 'console';
+import { Typography } from '@mui/material';
 
 
 
-export function FileList() {
+function DeleteBlobButton({file}: {file: KnowledgeBaseFile}) {
+  const {
+    setFiles,
+  } = useContext(KnowledgeBaseContext);
+  
+  const handleDelete = async (currentFile: KnowledgeBaseFile) => {
+    // Remove files state with removed status
+    setFiles(prevFiles => prevFiles?.map((file) => ({
+      ...file,
+      status: file.name === currentFile.name ? 'removed' : file.status
+    })));
+  }
+
+
+
+  return(
+    <IconButton onClick={() =>handleDelete(file)} size="large">
+      <DeleteRoundedIcon sx={{fontSize: 'var(--icon-size-small)', color: 'var(--text1-color)'}} />
+    </IconButton>
+  );
+}
+
+
+
+function UndoButton({file}: {file: KnowledgeBaseFile}) {
+  const {
+    setFiles,
+  } = useContext(KnowledgeBaseContext);
+  
+  const handleDelete = async (currentFile: KnowledgeBaseFile) => {
+    // Remove files state with removed status
+    setFiles(prevFiles => prevFiles?.map((file) => ({
+      ...file,
+      status: file.name === currentFile.name ? '' : file.status
+    })));
+  }
+
+
+
+  return(
+    <IconButton onClick={() =>handleDelete(file)} size="large">
+      <ReplayRoundedIcon sx={{fontSize: 'var(--icon-size-small)', color: 'var(--no-color)'}} />
+    </IconButton>
+  );
+}
+
+
+
+function DeleteUploadButton({file}: {file: KnowledgeBaseFile}) {
+  const {
+    setFiles,
+    setUploadFiles
+  } = useContext(KnowledgeBaseContext);
+  
+  const handleDelete = async (currentFile: KnowledgeBaseFile) => {
+    setUploadFiles(prevFiles => prevFiles?.filter((file) => file.name !== currentFile.name));
+    setFiles(prevFiles => prevFiles?.filter((file) => file.name !== currentFile.name));
+  }
+
+
+
+  return(
+    <IconButton onClick={() =>handleDelete(file)} size="large">
+      <DeleteRoundedIcon sx={{fontSize: 'var(--icon-size-small)', color: 'var(--yes-color)'}} />
+    </IconButton>
+  );
+}
+
+
+
+function FileList() {
   const {
     files,
     setFiles,
@@ -31,43 +117,52 @@ export function FileList() {
     setRefresh
   } = useContext(KnowledgeBaseContext);
 
+  const {
+    chatCase
+  } = useContext(GlobalContext);
+
   const axiosToBackend = useAxiosToBackend();
 
-  // const files = ['file1', 'file2', 'file3', 'file4', 'file5'];
-  // const [checked, setChecked] = useState([1]);
-  // const handleToggle = (value: any) => () => {
-  //   const currentIndex = checked.indexOf(value); // find index of data index in checked array
-  //   const newChecked = [...checked];
 
-  //   if (currentIndex === -1) { // if there is no 'value' in checked array, append
-  //     newChecked.push(value);
-  //   } else {
-  //     newChecked.splice(currentIndex, 1); 
-  //   }
-
-  //   setChecked(newChecked);
-  // };
 
   const handleItemClick = (currentFile: KnowledgeBaseFile) => {
-    console.log(currentFile);
     setSelectedFile(currentFile)
   };
 
-  const handleDelete = async (currentFile: KnowledgeBaseFile) => {
-    console.log(currentFile);
-    await axiosToBackend.post('/knowledgebase/delete_file/', {name: currentFile.name});
-    setRefresh(!refresh);
-  }
+
 
   useEffect(() => {
     async function getBlobs() {
-      const response = await axiosToBackend.get('/knowledgebase/get_blob_info/');
-      console.log(response.data);
+      const response = await axiosToBackend.get(
+        '/knowledgebase/get_blob_info/',
+        {headers: {'Content-Type': 'application/json', 'Case': chatCase}}
+      );
       setFiles(response.data);
     }
     getBlobs();
   }
   , [refresh]);
+  
+
+
+  const colorByStatus = (status: any) => {
+    if (status === "added") return "var(--yes-color)";
+    if (status === "removed") return "var(--no-color)";
+    return "black";
+  };
+
+  const iconByStatus = (status: any) => {
+    if (status === "added") return <AddCircleOutlineRoundedIcon sx = {{fontSize: 'var(--icon-size-small)', color: 'var(--yes-color)'}}/>;
+    if (status === "removed") return <RemoveCircleOutlineRoundedIcon sx = {{fontSize: 'var(--icon-size-small)', color: 'var(--no-color)'}}/>;
+    return <ArticleOutlinedIcon sx = {{fontSize: 'var(--icon-size-small)', color: 'var(--text1-color)'}}/>;
+  }
+
+  const secondButtonByStatus = (status: any, file: KnowledgeBaseFile) => {
+    if (status === "added") return <DeleteUploadButton file={file}/>;
+    if (status === "removed") return <UndoButton file={file}/>;
+    return <DeleteBlobButton file={file}/>;
+  }
+  
 
   return (
     <List dense sx={{ width: '100%', bgcolor: 'transparent' }}>
@@ -77,23 +172,27 @@ export function FileList() {
           <ListItem
             key={index}
             secondaryAction={
-              <IconButton onClick={() =>handleDelete(x)} size="large">
-                <DeleteRoundedIcon fontSize="inherit" />
-              </IconButton>
-              // <Checkbox
-              //   edge="end"
-              //   onChange={handleToggle(index)}
-              //   checked={checked.indexOf(index) !== -1}
-              //   inputProps={{ 'aria-labelledby': labelId }}
-              // />
+              secondButtonByStatus(x.status, x)
             }
             disablePadding
           >
-            <ListItemButton onClick={() => handleItemClick(x)}>
-              <ListItemAvatar>
-                <ArticleOutlinedIcon sx = {{fontSize: 'var(--icon-size)', color: 'var(--primary-color)'}}/>
+            <ListItemButton onClick={() => handleItemClick(x)} sx={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+              <ListItemAvatar sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', m:0}}>
+                {iconByStatus(x.status)}
               </ListItemAvatar>
-              <ListItemText id={labelId} primary={x.name} secondary={null} primaryTypographyProps={{ sx: {color: 'var(--primary-text-color)', fontSize: '20px'}}} secondaryTypographyProps={{ sx: {color: 'var(--primary-color)', fontSize: '14px'} }}/>
+              <ListItemText 
+                id={labelId} 
+                primary={x.name} 
+                secondary={null} 
+                primaryTypographyProps={{ sx: {
+                  color: colorByStatus(x.status), 
+                  fontSize: '14px',
+                  }}} 
+                secondaryTypographyProps={{ sx: {
+                  color: 'var(--primary-color)', 
+                  fontSize: '14px'
+                  }}}
+              />
             </ListItemButton>
 
           </ListItem>
@@ -105,15 +204,110 @@ export function FileList() {
 
 
 
-function ChooseFileButton() {
-  const {uploadFiles, setUploadFiles} = useContext(KnowledgeBaseContext);
+// function UrlList() {
+//   const {
+//     urls,
+//     setUrls,
+//     refresh,
+//     setRefresh
+//   } = useContext(KnowledgeBaseContext);
+
+//   const {
+//     chatCase
+//   } = useContext(GlobalContext);
+
+//   const axiosToBackend = useAxiosToBackend();
+
+//   // const handleDelete = async (currentUrl: Url) => {
+//   //   await axiosToBackend.post(
+//   //     '/knowledgebase/tag_delete_file/',
+//   //     {name: currentFile.name},
+//   //     {headers: {'Content-Type': 'application/json', 'Case': chatCase}}
+//   //   );
+//   //   setRefresh(!refresh);
+//   // }
+
+//   // useEffect(() => {
+//   //   async function getBlobs() {
+//   //     const response = await axiosToBackend.get(
+//   //       '/knowledgebase/get_blob_info/',
+//   //       {headers: {'Content-Type': 'application/json', 'Case': chatCase}}
+//   //     );
+//   //     setFiles(response.data);
+//   //   }
+//   //   getBlobs();
+//   // }
+//   // , [refresh]);
+
+//   return (
+//     <List dense sx={{ width: '100%', bgcolor: 'transparent' }}>
+//       {urls?.map((x, index) => {
+//         const labelId = `${index}`;
+//         return (
+//           <ListItem
+//             // key={index}
+//             // secondaryAction={
+//             //   <IconButton onClick={() =>handleDelete(x)} size="large">
+//             //     <DeleteRoundedIcon sx={{fontSize: 'var(--icon-size-small)', color: 'var(--primary-color)'}} />
+//             //   </IconButton>
+//             // }
+//             // disablePadding
+//           >
+//             <ListItemButton sx={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+//               <ListItemAvatar sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', m:0}}>
+//                 <ArticleOutlinedIcon sx = {{fontSize: 'var(--icon-size-small)', color: 'var(--primary-color)'}}/>
+//               </ListItemAvatar>
+//               <ListItemText 
+//                 id={labelId} 
+//                 primary={x.name} 
+//                 secondary={null} 
+//                 primaryTypographyProps={{ sx: {
+//                   color: 'var(--primary-text-color)', 
+//                   fontSize: '14px',
+//                   textDecoration: ('is_deleted' in x.metadata) && x.metadata.is_deleted === 'true' ? 'line-through' : 'none'
+//                   }}} 
+//                 secondaryTypographyProps={{ sx: {
+//                   color: 'var(--primary-color)', 
+//                   fontSize: '14px'
+//                   }}}
+//               />
+//             </ListItemButton>
+
+//           </ListItem>
+//         );
+//       })}
+//     </List>
+//   );
+// }
+
+
+
+function AddFileButton() {
+  const {
+    uploadFiles, 
+    setUploadFiles,
+    files,
+    setFiles
+  } = useContext(KnowledgeBaseContext);
+
+
+
   const handleFileUpload = (event: any) => {
-    setUploadFiles([...event.target.files]);
+    setUploadFiles((prevUploadFiles) => [...(prevUploadFiles || []), ...event.target.files]);
+
+
+    // Add to files state with added status
+    const addedFiles = [...event.target.files].map((file: KnowledgeBaseFile) => ({
+      name: file.name,
+      status: 'added'
+    }));
+    
+    setFiles((prevFiles) => [...(prevFiles || []), ...addedFiles]);
   };
 
   return (
-    <Button component="label" sx={{color:'rgb(23, 23, 23)', background: 'rgb(255, 218, 23)', fontWeight: 'bold', fontStyle: 'italic', fontSize: '16px', paddingLeft: 2, paddingRight: 2, mr: 2}}>
-      Choose Files
+    <Button component="label" size="small" sx={{color:'var(--text1-color)', background: 'var(--component3-color)', fontWeight: 'bold', fontStyle: 'italic', fontSize: '12px', paddingLeft: 2, paddingRight: 2, mr: 2}}>
+      Add Files
       <input type="file" hidden onChange={handleFileUpload} multiple/>
     </Button>
   );
@@ -123,32 +317,78 @@ function ChooseFileButton() {
 
 function BuildKnowledgeBaseButton() {
   const {
+    chatCase
+  } = useContext(GlobalContext);
+
+  const {
+    files,
     uploadFiles,
     refresh,
-    setRefresh
+    setRefresh,
+    setIndexerStatus,
+    setUploadFiles
   } = useContext(KnowledgeBaseContext);
-  const AxiosToBackend = useAxiosToBackend();
+
+  const axiosToBackend = useAxiosToBackend();
+  
   const handleClick = async (event: any) => {
-      // Upload files to blob storage
-    const response = await AxiosToBackend.post(
+    // Set indxer status
+    setIndexerStatus({status: 'running'});
+
+    
+
+    // Empty upload files
+    setUploadFiles([]);
+
+
+
+    // tag metadata (is_deleted) for "removed" files
+    await axiosToBackend.post(
+      '/knowledgebase/tag_delete_file/',
+      files?.filter((file) => file.status === 'removed').map((file) => (file.name)),
+      {headers: {'Content-Type': 'application/json', 'Case': chatCase}}
+    );
+    
+
+
+    // Upload files to blob storage
+    await axiosToBackend.post(
       '/knowledgebase/upload/',
       uploadFiles,
-      {headers: {'Content-Type': 'multipart/form-data'}}
+      {headers: {
+        'Content-Type': 'multipart/form-data', 
+        'Case': chatCase}}
     );
 
-    // Create index
-    await AxiosToBackend.get(
-      '/knowledgebase/create_index/',
-      {headers: {'Content-Type': 'application/json'}}
-    );
 
+
+    // // Scrape urls
+    // await axiosToBackend.post(
+    //   '/knowledgebase/scrape_urls/',
+    //   {urls: ['https://www.microsoft.com/en-au/microsoft-365/copilot', 'https://learn.microsoft.com/en-us/azure/search/hybrid-search-overview', 'https://learn.microsoft.com/en-us/azure/search/search-lucene-query-architecture', 'https://learn.microsoft.com/en-us/azure/search/search-query-overview']},
+    //   {headers: {
+    //     'Content-Type': 'application/json', 
+    //     'Case': chatCase}}
+    // );
+
+
+
+    // Creat & run index
+    await axiosToBackend.get(
+      '/knowledgebase/create_or_run_index/',
+      {headers: {
+        'Content-Type': 'application/json', 
+        'Case': chatCase}}
+    );
+    
     setRefresh(!refresh);
+
   };
 
 
 
   return (
-    <Button onClick={handleClick} component="label" sx={{color:'rgb(23, 23, 23)', background: 'rgb(255, 218, 23)', fontWeight: 'bold', fontStyle: 'italic', fontSize: '16px', paddingLeft: 2, paddingRight: 2}}>
+    <Button onClick={handleClick} size="small" component="label" sx={{color:'var(--text1-color)', background: 'var(--component3-color)', fontWeight: 'bold', fontStyle: 'italic', fontSize: '12px', paddingLeft: 2, paddingRight: 2}}>
       Build Knowledge Base
     </Button>
   );
@@ -157,24 +397,114 @@ function BuildKnowledgeBaseButton() {
 
 
 function KnowledgeBase() {
-  const {selectedFile} = useContext(KnowledgeBaseContext);
+  const {
+    selectedFile,
+    indexerStatus,
+    setIndexerStatus
+  } = useContext(KnowledgeBaseContext);
+
+  const axiosToBackend = useAxiosToBackend();
+
+
+  useEffect(() => {
+    let intervalId: any;
+  
+    async function getKnowledgeBaseStatus() {
+      const response = await axiosToBackend.get(
+        '/knowledgebase/get_knowledge_base_status/',
+        { headers: { 'Content-Type': 'application/json', 'Case': 'organisation' } }
+      );
+
+
+
+      // Convert last_updated to a Date object
+      const lastUpdatedDate = new Date(response.data[0].last_updated);
+      const now = new Date();
+
+      // Calculate the difference in milliseconds
+      const diffInMs = now.getTime() - lastUpdatedDate.getTime();
+
+      // Calculate the difference in days, hours, and minutes
+      const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+      const diffInHours = Math.floor((diffInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const diffInMinutes = Math.floor((diffInMs % (1000 * 60 * 60)) / (1000 * 60));
+  
+
+
+      // Set the indexer status
+      const status = {
+        status: response.data[0].status,
+        last_updated: response.data[0].last_updated,
+        time_difference: `${diffInDays} days, ${diffInHours} hours, ${diffInMinutes} minutes`
+      };
+
+      setIndexerStatus(status);
+  
+      // If status is 'completed', stop the interval
+      if (response.data[0].status === 'completed') {
+        clearInterval(intervalId);
+      }
+    }
+  
+    // Start polling every 5 seconds
+    intervalId = setInterval(getKnowledgeBaseStatus, 5000);
+  
+    // Cleanup: clear interval when component unmounts
+    return () => clearInterval(intervalId);
+  }, []);
+  
+
   return (
-    <Grid container sx={{height:'var(--height-main)', border: 'none', padding:5}}> {/*main height is 84vh*/}
-      <Grid item xs={4} sx={{height:'90vh', backgroundColor:'rgb(246, 243, 235)', borderRadius:'20px', padding: 3, border: 'none'}}>
-        <Grid container>
-          <Grid item xs={12} sx={{height:'76vh'}}>
-            <FileList />
-          </Grid>
-          <Divider sx={{border:'1px solid var(--border-color)', width: '100%', m:0}}/>
-          <Grid item xs={12} sx={{height:'10vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', border: 'none'}}>
-            <ChooseFileButton />
-            <BuildKnowledgeBaseButton/>
-          </Grid>
-        </Grid>
-      </Grid>
+    <div className="knowledgebase">
+      <div className="document">
+        <div className="header">
+          <h3 style={{
+            marginLeft: '20px', 
+            fontWeight: 'bolds',
+            fontSize: '25px'
+            }}>
+              Knowledge Base
+            </h3>
+          <h5 style={{
+            fontWeight: 'bold',
+            fontStyle: 'italic',
+            fontSize: '12px',
+            color: 'var(--text2-color)',
+            marginRight: '20px'
+          }}>
+            {indexerStatus?.status === "completed" ? `Your knowledge base has been upadated ( ${indexerStatus.time_difference} ago ).` : ''}
+          </h5>
+        </div>
+        <div className="item-list"> 
+          <FileList/>
+        </div>
+      </div>
 
-      <Grid item xs={0.5}/>
 
+
+      {/* <div className="url">
+        <h3 style={{ marginLeft: '20px' }}>Knowledge Base (URLs)</h3>
+        <FileList/>
+      </div> */}
+
+
+
+      <div className='upload-buttons'>
+        <AddFileButton />
+        <BuildKnowledgeBaseButton/>
+      </div>
+
+
+
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={indexerStatus?.status === 'running' || indexerStatus?.status === undefined}
+        >
+        <CircularProgress color="inherit" />
+        {indexerStatus?.status === 'running' ? <Typography sx={{ml:2}}>Building Knowledge Base...</Typography> : null}
+      </Backdrop>
+      
+{/* 
       <Grid item xs={7.5} sx={{backgroundColor:'rgb(246, 243, 235)', borderRadius:'20px', padding: 5}}>
         {selectedFile ? <iframe
             src={selectedFile.url}
@@ -185,11 +515,12 @@ function KnowledgeBase() {
               opacity: '0.8',
               border: 'none'}}
           /> : null}
-      </Grid>
-    </Grid>
+      </Grid> */}
+    </div>
   );
 }
 
 
 
 export default KnowledgeBase;
+

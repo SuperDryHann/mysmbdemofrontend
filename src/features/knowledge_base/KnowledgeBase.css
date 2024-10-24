@@ -1,0 +1,94 @@
+@import url('../global/Global.css');
+
+/* Knowledgebase styles */
+.knowledgebase {
+  display: grid;
+  grid-template-rows: 1fr 0.05fr;
+  grid-template-columns: 1fr;
+  grid-template-areas: 
+    "document"
+    "upload-buttons";
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.upload {
+  grid-area: upload;
+  background-color: var(--background2-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 30px;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.chosen-file {
+  /* background-color: var(--background1-color); */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-grow: 1;
+  width: 100%;
+  margin-bottom: 15px;}
+
+.status {
+  /* background-color: var(--background1-color); */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.document {
+  grid-area: document;
+  background-color: var(--component-opacity-color);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.item-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+}
+
+.url {
+  grid-area: url;
+  background-color: var(--component-opacity-color);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.upload-buttons {
+  /* background-color: var(--background1-color); */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+}

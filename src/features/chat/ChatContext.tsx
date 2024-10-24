@@ -8,6 +8,10 @@ interface ChatContextType {
     setMessages: Dispatch<SetStateAction<Message[]>>;
     chatLoading: boolean;
     setChatLoading: Dispatch<SetStateAction<boolean>>;
+    isSidebarOpen: boolean;
+    setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
+    currentReferenceContent: string | undefined;
+    setCurrentReferenceContent: Dispatch<SetStateAction<string | undefined>>;
 }
 
 // Create the context with no default values (undefined as initial state)
@@ -18,6 +22,10 @@ const ChatContext = createContext<ChatContextType>({
     setMessages: () => {},
     chatLoading: false,
     setChatLoading: () => {},
+    isSidebarOpen: false,
+    setIsSidebarOpen: () => {},
+    currentReferenceContent: undefined,
+    setCurrentReferenceContent: () => {},
 });
 
 export default ChatContext;
@@ -42,6 +50,16 @@ export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
         setChatLoading
     ] = useState<boolean>(false);
 
+    const [
+        isSidebarOpen, 
+        setIsSidebarOpen
+    ] = useState<boolean>(false);
+
+    const [
+        currentReferenceContent, 
+        setCurrentReferenceContent
+    ] = useState<string | undefined>(undefined);
+
 
 
     const contextData: ChatContextType = {
@@ -51,6 +69,10 @@ export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
         setMessages,
         chatLoading,
         setChatLoading,
+        isSidebarOpen,
+        setIsSidebarOpen,
+        currentReferenceContent,
+        setCurrentReferenceContent,
     };
 
 

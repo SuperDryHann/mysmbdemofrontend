@@ -4,12 +4,21 @@ import {Reference, Message, MessageInputProps} from './ChatInterface';
 import ChatContext from './ChatContext';
 import {app, authentication} from '@microsoft/teams-js'; 
 import ReactMarkdown from 'react-markdown';
+import GlobalContext from '../global/GlobalContext';
+import {
+  Drawer, 
+  IconButton,
+  } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import {GlobalLoadingImage} from '../global/GlobalComponents';
+import globalContext from '../global/GlobalContext';
 
 
-const LoadingImage = () => {
+
+const ChatLoadingImage = () => {
   return (
-    <div className="loading">
-      Thinking...
+    <div className="chat-loading">
+      Thinking
     </div>
   );
 };
@@ -55,7 +64,7 @@ const ChatLog: React.FC = () => {
           >
             {msg.sender === 'bot' && (
               <img
-                src="/donut_logo.png"
+                src="/logo_mysmb.png"
                 alt="Bot Avatar"
                 className="avatar"
               />
@@ -73,12 +82,11 @@ const ChatLog: React.FC = () => {
                     {msg.references.map((item, index) => (
                       <li key={index} className="reference-item">
                         <div className="reference-button-container">
-                          <button
-                            className="reference-button"
-                          >
-                            <sup>{index + 1}</sup> <em>{item.title}</em>
-                          </button>
-                          <span className="tooltip">{item.content}</span>
+                          <ReferenceButton
+                            index={index + 1}
+                            referenceTitle={item.title}
+                            referenceContent={item.content}
+                          />
                         </div>
                       </li>
                     ))}
@@ -95,12 +103,12 @@ const ChatLog: React.FC = () => {
         {chatLoading && (
           <div className="bot-message-container">
             <img
-              src="/donut_logo.png"
+              src="/logo_mysmb.png"
               alt="Bot Avatar"
               className="avatar"
             />
             <div className="bot-message">
-              <LoadingImage />
+              <ChatLoadingImage />
             </div>
           </div>
         )}
@@ -115,11 +123,14 @@ const ChatLog: React.FC = () => {
 // Message input component
 const MessageInput: React.FC<MessageInputProps> = ({ onSend }) => {
   const {
+    worksheet
+  } = useContext(globalContext);
+
+  const {
     messageText,
     setMessageText
   } = useContext(ChatContext);
   
-
   const handleSend = () => {
     if (messageText.trim() !== '') {
       onSend(messageText);
@@ -140,7 +151,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSend }) => {
         value={messageText}
         onChange={(e) => setMessageText(e.target.value)}
         onKeyUp={handleKeyPress}
-        placeholder="Message MySMB"
+        placeholder={worksheet === "customer_service_chat" ? "Ask mySMB" : "Ask myCompany"}
       />
       <button onClick={handleSend}>Send</button>
     </div>
@@ -148,10 +159,84 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSend }) => {
 };
 
 
+// Reference button component
+const ReferenceButton: React.FC<{index: number, referenceTitle: string, referenceContent: string}> = ({index, referenceTitle, referenceContent}) => {
+  const {
+    setIsSidebarOpen,
+    setCurrentReferenceContent,
+  } = useContext(ChatContext);
+  
+  const toggleDrawer = (open: boolean) => (event: React.MouseEvent) => {
+    setIsSidebarOpen(open);
+    setCurrentReferenceContent(referenceContent);
+  };
+
+  return (
+    <div>
+      {/* Transparent Button */}
+      <button
+        className="reference-button"
+        onClick={toggleDrawer(true)}
+      >
+      <sup>{index}</sup> {referenceTitle}
+      </button>
+    </div>
+  );
+};
+
+
+
+// Sidebar for reference
+const Sidebar: React.FC = () => {
+  const {
+    isSidebarOpen,
+    setIsSidebarOpen,
+    currentReferenceContent,
+
+  } = useContext(ChatContext);
+
+  const toggleDrawer = (open: boolean) => (event: React.MouseEvent) => {
+    setIsSidebarOpen(open);
+  };
+
+  return (
+    <Drawer
+      anchor="right"
+      open={isSidebarOpen}
+      onClose={toggleDrawer(false)}
+      sx={{
+        '& .MuiDrawer-paper': {
+          boxShadow: 'none', // Removes the shadow
+        }
+      }}
+    >
+      {/* Drawer content goes here */}
+      <div style={{
+        width: 500,
+        padding: 40,
+        fontSize: '12px',
+        }}>
+        <h2 style={{color: 'var(--component3-color'}}>Source</h2>
+        <ReactMarkdown>{currentReferenceContent}</ReactMarkdown>
+      </div>
+    </Drawer>
+  );
+}
+
+
 
 // Entire chat component
 const Chat: React.FC = () => {
-  const { setMessages, setChatLoading } = useContext(ChatContext);
+  const {
+    chatCase,
+    globalLoading,
+    setGlobalLoading
+  } = useContext(GlobalContext);
+
+  const {
+    setMessages, 
+    setChatLoading 
+  } = useContext(ChatContext);
 
   const currentBotMessageId = useRef<number | null>(null);
   const wsRef = useRef<WebSocket | null>(null); // Ref to store WebSocket instance
@@ -159,17 +244,20 @@ const Chat: React.FC = () => {
   useEffect(() => {
     // Initialize WebSocket connection when component mounts
     const initializeWebSocket = async () => {
+      setGlobalLoading(true);
       try {
         await app.initialize();
-        const accessToken = await authentication.getAuthToken();
-        const ws = new WebSocket(`${process.env.REACT_APP_BACKEND_URL_WS}/chat/?access_token=${accessToken}`);
+        const accessToken = await authentication.getAuthToken();        
+        const ws = new WebSocket(`${process.env.REACT_APP_BACKEND_URL_WS}/chat/?access_token=${accessToken}&case=${chatCase}`);
 
         ws.onopen = () => {
           console.log('WebSocket connected');
+          setGlobalLoading(false);
         };
 
         ws.onmessage = (event) => {
           const data = JSON.parse(event.data);
+          console.log('WebSocket message:', data);
 
           // Initiate bot message
           if (currentBotMessageId.current === null) {
@@ -255,11 +343,14 @@ const Chat: React.FC = () => {
   };
 
   return (
-    <div className="app-container">
-      <ChatLog />
-      <MessageInput onSend={handleSendMessage} />
-    </div>
+      <div className="app-container">
+            <Sidebar />
+            <ChatLog />
+            <MessageInput onSend={handleSendMessage} />
+      </div>
   );
 };
+
+
 
 export default Chat;

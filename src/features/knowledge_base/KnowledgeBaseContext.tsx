@@ -1,5 +1,9 @@
 import {createContext, useState, Dispatch, SetStateAction, ReactNode} from 'react';
-import {KnowledgeBaseFile} from './KnowledgeBaseInterface';
+import {
+    KnowledgeBaseFile,
+    Url,
+    IndexerStatus
+} from './KnowledgeBaseInterface';
 
 // Define the type for the context data
 interface KnowledgeBaseContextType {
@@ -7,10 +11,14 @@ interface KnowledgeBaseContextType {
     setSelectedFile: Dispatch<SetStateAction<KnowledgeBaseFile | undefined>>;
     files: KnowledgeBaseFile[] | undefined;
     setFiles: Dispatch<SetStateAction<KnowledgeBaseFile[] | undefined>>;
-    uploadFiles: any | undefined;
-    setUploadFiles: Dispatch<SetStateAction<any | undefined>>;
+    uploadFiles: File[] | undefined;
+    setUploadFiles: Dispatch<SetStateAction<File[] | undefined>>;
     refresh: boolean;
     setRefresh: Dispatch<SetStateAction<boolean>>;
+    urls: Url[] | undefined;
+    setUrls: Dispatch<SetStateAction<Url[] | undefined>>;
+    indexerStatus: IndexerStatus | undefined;
+    setIndexerStatus: Dispatch<SetStateAction<IndexerStatus | undefined>>;
 }
 
 // Create the context with no default values (undefined as initial state)
@@ -22,7 +30,11 @@ const KnowledgeBaseContext = createContext<KnowledgeBaseContextType>({
     uploadFiles: undefined,
     setUploadFiles: () => {},
     refresh: false,
-    setRefresh: () => {}
+    setRefresh: () => {},
+    urls: undefined,
+    setUrls: () => {},
+    indexerStatus: undefined,
+    setIndexerStatus: () => {}
 });
 
 export default KnowledgeBaseContext;
@@ -35,6 +47,10 @@ export const KnowledgeBaseContextProvider = ({ children }: { children: ReactNode
     const [files, setFiles] = useState<KnowledgeBaseFile[] | undefined>(undefined);  // Initialize with undefined
     const [uploadFiles, setUploadFiles] = useState<any | undefined>(undefined);  // Initialize with undefined
     const [refresh, setRefresh] = useState<boolean>(false);  // Initialize with false
+    const [urls, setUrls] = useState<Url[] | undefined>(undefined);  // Initialize with undefined
+    const [indexerStatus, setIndexerStatus] = useState<IndexerStatus | undefined>(undefined);  // Initialize with undefined
+
+
 
     const contextData: KnowledgeBaseContextType = {
         selectedFile,
@@ -44,7 +60,11 @@ export const KnowledgeBaseContextProvider = ({ children }: { children: ReactNode
         uploadFiles,
         setUploadFiles,
         refresh,
-        setRefresh
+        setRefresh,
+        urls,
+        setUrls,
+        indexerStatus,
+        setIndexerStatus
     };
 
     return (

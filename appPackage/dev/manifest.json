@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
   "manifestVersion": "1.16",
   "version": "1.0.0",
-  "id": "ef84b42c-fb88-4c72-ac6b-5a901529e21c",
+  "id": "ef84b42c-fb88-4c72-ac6b-5a901529e29c",
   "packageName": "com.contoso.teamsauthsso",
   "developer": {
     "name": "Microsoft",
@@ -11,23 +11,23 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "mySMB.com",
-    "full": "mySMB.com"
+    "short": "mySMB.com_dev",
+    "full": "mySMB.com_dev"
   },
   "description": {
-    "short": "MySMB",
-    "full": "MySMB"
+    "short": "Tab Auth SSO app",
+    "full": "This sample shows sso authentication for tab."
   },
   "icons": {
-    "outline": "outline.png",
-    "color": "color.png"
+    "outline": "outline.jpg",
+    "color": "color.jpg"
   },
-  "accentColor": "#303134",
+  "accentColor": "#000000",
   "staticTabs": [
     {
       "entityId": "auth",
       "name": "Auth",
-      "contentUrl": "https://mysmbdemofrontend-cbhrd0c7epdzc7aw.australiaeast-01.azurewebsites.net/?inTeams=true",
+      "contentUrl": "https://ahbyo.au.ngrok.io/ssoDemo/?inTeams=true",
       "scopes": [
         "personal"
       ]
@@ -35,7 +35,7 @@
   ],
   "configurableTabs": [
     {
-      "configurationUrl": "https://mysmbdemofrontend-cbhrd0c7epdzc7aw.australiaeast-01.azurewebsites.net/configure/?inTeams=true",
+      "configurationUrl": "https://ahbyo.au.ngrok.io/configure/?inTeams=true",
       "canUpdateConfiguration": true,
       "scopes": [
         "team"
@@ -47,10 +47,10 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "mysmbdemofrontend-cbhrd0c7epdzc7aw.australiaeast-01.azurewebsites.net"
+    "ahbyo.au.ngrok.io"
   ],
   "webApplicationInfo": {
-    "id": "861bcbbf-0e03-4665-97ef-280d3e748075",
-    "resource": "api://mysmbdemofrontend-cbhrd0c7epdzc7aw.australiaeast-01.azurewebsites.net/861bcbbf-0e03-4665-97ef-280d3e748075"
+    "id": "489ab150-7e03-4b49-81ec-7635f522d0d8",
+    "resource": "api://ahbyo.au.ngrok.io/489ab150-7e03-4b49-81ec-7635f522d0d8"
   }
 }
