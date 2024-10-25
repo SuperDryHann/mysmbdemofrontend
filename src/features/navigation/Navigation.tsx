@@ -133,10 +133,8 @@ export function Navigation({children}: {children: ReactNode}) {
     </nav>
 
     {/* Main Content */}
-    <main className="content-shell">
-      <div className="content">
-        {children}
-      </div>
+    <main className="content">
+      {children}
     </main>
   </div>
   );

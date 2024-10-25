@@ -29,7 +29,14 @@ function App() {
 
   return (
     <div className="App">
-      <Grid container sx={{height: '100vh', width: '100vw', backgroundColor: 'var(--background1-color)'}}>
+      <Grid container  sx={{
+        height: '100vh',
+        width: '100vw',
+        backgroundImage: worksheet === "company_chat" || worksheet === "company_knowledge_base" ? 'url(/background1.png)' : 'url(/background2.png)',
+        backgroundSize: 'cover', // Ensures the image covers the entire area
+        backgroundPosition: 'center', // Centers the image
+        backgroundRepeat: 'no-repeat', // Prevents the image from repeating
+      }}>
         <Navigation key={worksheet}>
           <ChatContextProvider>
           <KnowledgeBaseContextProvider>
@@ -48,10 +55,14 @@ function App() {
 
 
         <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{
+          color: '#fff',
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          backgroundColor: 'rgba(255, 255, 255, 0.5)'
+        }}
         open={globalLoading}
         >
-          <CircularProgress color="inherit" />
+          <CircularProgress sx={{color: 'var(--component3-color)'}}/>
         </Backdrop>
 
 

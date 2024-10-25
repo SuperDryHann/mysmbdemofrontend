@@ -398,7 +398,6 @@ function BuildKnowledgeBaseButton() {
 
 function KnowledgeBase() {
   const {
-    selectedFile,
     indexerStatus,
     setIndexerStatus
   } = useContext(KnowledgeBaseContext);
@@ -447,7 +446,7 @@ function KnowledgeBase() {
     }
   
     // Start polling every 5 seconds
-    intervalId = setInterval(getKnowledgeBaseStatus, 5000);
+    intervalId = setInterval(getKnowledgeBaseStatus, 2000);
   
     // Cleanup: clear interval when component unmounts
     return () => clearInterval(intervalId);
@@ -497,25 +496,17 @@ function KnowledgeBase() {
 
 
       <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{
+          color: '#fff',
+          zIndex: 10,
+          position: 'absolute',
+          backgroundColor: 'rgba(255, 255, 255, 0.5)'
+        }}
         open={indexerStatus?.status === 'running' || indexerStatus?.status === undefined}
         >
-        <CircularProgress color="inherit" />
+        <CircularProgress sx={{color:'var(--component3-color)'}} />
         {indexerStatus?.status === 'running' ? <Typography sx={{ml:2}}>Building Knowledge Base...</Typography> : null}
-      </Backdrop>
-      
-{/* 
-      <Grid item xs={7.5} sx={{backgroundColor:'rgb(246, 243, 235)', borderRadius:'20px', padding: 5}}>
-        {selectedFile ? <iframe
-            src={selectedFile.url}
-            width="100%"
-            height="100%"
-            style={{
-              borderRadius: '20px',
-              opacity: '0.8',
-              border: 'none'}}
-          /> : null}
-      </Grid> */}
+      </Backdrop>      
     </div>
   );
 }

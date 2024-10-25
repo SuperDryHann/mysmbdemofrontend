@@ -18,9 +18,6 @@ html, body {
     "sidebar content-shell";
   height: 100vh;
   width: 100vw;
-  background-image: url('../../../public/background1.png');
-  background-size: cover;
-  background-position: center;
 }
 
 .navigation::before {
@@ -75,8 +72,9 @@ html, body {
 }
 
 .content {
-  width: 95%;
-  height: 96%;
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

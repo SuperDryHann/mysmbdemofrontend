@@ -6,12 +6,23 @@ import {app, authentication} from '@microsoft/teams-js';
 import ReactMarkdown from 'react-markdown';
 import GlobalContext from '../global/GlobalContext';
 import {
+  CircularProgress,
   Drawer, 
   IconButton,
   } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import {GlobalLoadingImage} from '../global/GlobalComponents';
 import globalContext from '../global/GlobalContext';
+
+
+
+// const ChatLoadingImage = () => {
+//   return (
+//     <div className="chat-loading">
+//       Thinking
+//     </div>
+//   );
+// };
 
 
 
@@ -22,7 +33,6 @@ const ChatLoadingImage = () => {
     </div>
   );
 };
-
 
 
 // Chat log component
@@ -108,7 +118,11 @@ const ChatLog: React.FC = () => {
               className="avatar"
             />
             <div className="bot-message">
-              <ChatLoadingImage />
+              <CircularProgress 
+              sx={{
+                color: 'var(--component3-color)',
+                fontSize: '20px'
+                }}/>
             </div>
           </div>
         )}
@@ -247,7 +261,8 @@ const Chat: React.FC = () => {
       setGlobalLoading(true);
       try {
         await app.initialize();
-        const accessToken = await authentication.getAuthToken();        
+        const accessToken = await authentication.getAuthToken();
+        console.log('Access token:', accessToken);
         const ws = new WebSocket(`${process.env.REACT_APP_BACKEND_URL_WS}/chat/?access_token=${accessToken}&case=${chatCase}`);
 
         ws.onopen = () => {

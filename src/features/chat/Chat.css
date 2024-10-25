@@ -1,5 +1,11 @@
 @import url('../global/Global.css');
 
+
+
+* {
+    box-sizing: border-box;
+  }
+
 /* Remove default margins and paddings */
 html, body {
     margin: 0;
@@ -19,9 +25,10 @@ html, body, #root {
 .app-container {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100%;
     width: 100%;
     margin: 0 auto;
+    padding: 50px 50px 0 50px
 }
 
 
@@ -144,7 +151,8 @@ html, body, #root {
     padding: 5px 10px;
     display: flex;
     background-color: var(--component-opacity-color);
-    border-radius: 20px; /* Rounded corners */
+    border-radius: 20px;
+    margin-bottom: 50px;
 }
   
 /* Input and button styles */
@@ -163,6 +171,7 @@ html, body, #root {
 }
   
 .message-input button {
+    border-radius: 20px;
     padding: 10px 20px;
     margin-left: 10px;
     font-size: 16px;
@@ -202,6 +211,8 @@ html, body, #root {
     background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, transparent 80%);
     transform: translateX(0%);
     animation: shine 3s infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
 }
 
 @keyframes shine {
