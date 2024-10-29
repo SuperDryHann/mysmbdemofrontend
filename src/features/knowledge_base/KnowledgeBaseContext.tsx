@@ -19,6 +19,8 @@ interface KnowledgeBaseContextType {
     setUrls: Dispatch<SetStateAction<Url[] | undefined>>;
     indexerStatus: IndexerStatus | undefined;
     setIndexerStatus: Dispatch<SetStateAction<IndexerStatus | undefined>>;
+    knowledgeBaseLoading: boolean;
+    setKnowledgeBaseLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 // Create the context with no default values (undefined as initial state)
@@ -34,7 +36,9 @@ const KnowledgeBaseContext = createContext<KnowledgeBaseContextType>({
     urls: undefined,
     setUrls: () => {},
     indexerStatus: undefined,
-    setIndexerStatus: () => {}
+    setIndexerStatus: () => {},
+    knowledgeBaseLoading: true,
+    setKnowledgeBaseLoading: () => {}
 });
 
 export default KnowledgeBaseContext;
@@ -48,7 +52,8 @@ export const KnowledgeBaseContextProvider = ({ children }: { children: ReactNode
     const [uploadFiles, setUploadFiles] = useState<any | undefined>(undefined);  // Initialize with undefined
     const [refresh, setRefresh] = useState<boolean>(false);  // Initialize with false
     const [urls, setUrls] = useState<Url[] | undefined>(undefined);  // Initialize with undefined
-    const [indexerStatus, setIndexerStatus] = useState<IndexerStatus | undefined>(undefined);  // Initialize with undefined
+    const [indexerStatus, setIndexerStatus] = useState<IndexerStatus | undefined>(undefined);
+    const [knowledgeBaseLoading, setKnowledgeBaseLoading] = useState<boolean>(true);
 
 
 
@@ -64,7 +69,9 @@ export const KnowledgeBaseContextProvider = ({ children }: { children: ReactNode
         urls,
         setUrls,
         indexerStatus,
-        setIndexerStatus
+        setIndexerStatus,
+        knowledgeBaseLoading,
+        setKnowledgeBaseLoading
     };
 
     return (

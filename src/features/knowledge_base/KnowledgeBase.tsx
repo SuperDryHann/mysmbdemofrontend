@@ -399,7 +399,10 @@ function BuildKnowledgeBaseButton() {
 function KnowledgeBase() {
   const {
     indexerStatus,
-    setIndexerStatus
+    setIndexerStatus,
+    knowledgeBaseLoading,
+    setKnowledgeBaseLoading,
+    refresh
   } = useContext(KnowledgeBaseContext);
 
   const axiosToBackend = useAxiosToBackend();
@@ -438,9 +441,11 @@ function KnowledgeBase() {
       };
 
       setIndexerStatus(status);
+
+      setKnowledgeBaseLoading(false);
   
       // If status is 'completed', stop the interval
-      if (response.data[0].status === 'completed') {
+      if (response.data[0].status === 'completed' || response.data[0].status === null) {
         clearInterval(intervalId);
       }
     }
@@ -450,7 +455,7 @@ function KnowledgeBase() {
   
     // Cleanup: clear interval when component unmounts
     return () => clearInterval(intervalId);
-  }, []);
+  }, [refresh]);
   
 
   return (
@@ -502,10 +507,18 @@ function KnowledgeBase() {
           position: 'absolute',
           backgroundColor: 'rgba(255, 255, 255, 0.5)'
         }}
-        open={indexerStatus?.status === 'running' || indexerStatus?.status === undefined}
+        open={indexerStatus?.status === 'running' || knowledgeBaseLoading}
         >
         <CircularProgress sx={{color:'var(--component3-color)'}} />
-        {indexerStatus?.status === 'running' ? <Typography sx={{ml:2}}>Building Knowledge Base...</Typography> : null}
+        {
+          indexerStatus?.status === 'running'
+            ? <Typography 
+              sx={{
+                ml:2, 
+                color: 'black'
+              }}>Building Knowledge Base...</Typography>
+            : null
+        }      
       </Backdrop>      
     </div>
   );
