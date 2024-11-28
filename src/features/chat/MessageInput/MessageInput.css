@@ -1,0 +1,71 @@
+
+
+/* Message input */
+/* Message input stays at the bottom */
+.message-input {
+  width: 70%;
+  margin: 0 auto;
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--component-opacity-color);
+  border-radius: 20px;
+  margin-bottom: 50px;
+}
+
+/* Input and button styles */
+.message-input input {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  color: #000;
+}
+
+.message-input input::placeholder {
+  color: #888; /* Placeholder text color */
+}
+
+.message-input button {
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin-left: 10px;
+  font-size: 16px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  color: #000;
+  font-weight: bold;
+}
+
+.message-input button:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* Slight background on hover */
+}
+
+.message-input button:disabled {
+  background-color: #e1dede;
+  color: #aaaaaa;
+  cursor: not-allowed;
+}
+
+.message-input .chat-action-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.MuiButtonBase-root {
+  min-width: 33px;
+  transition: all 0.5s ease-in-out;
+}
+
+.MuiButtonBase-root.MuiChip-colorDefault svg{
+  margin: auto !important;
+}
+
+.MuiChip-label:empty {
+  display: none;
+}

@@ -10,6 +10,8 @@ interface ChatContextType {
     setChatLoading: Dispatch<SetStateAction<boolean>>;
     isSidebarOpen: boolean;
     setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
+    directData: boolean;
+    setDirectData: Dispatch<SetStateAction<boolean>>;
     currentReferenceContent: string | undefined;
     setCurrentReferenceContent: Dispatch<SetStateAction<string | undefined>>;
 }
@@ -24,6 +26,8 @@ const ChatContext = createContext<ChatContextType>({
     setChatLoading: () => {},
     isSidebarOpen: false,
     setIsSidebarOpen: () => {},
+    directData: false,
+    setDirectData: () => {},
     currentReferenceContent: undefined,
     setCurrentReferenceContent: () => {},
 });
@@ -56,6 +60,11 @@ export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
     ] = useState<boolean>(false);
 
     const [
+        directData, 
+        setDirectData
+    ] = useState<boolean>(false);
+
+    const [
         currentReferenceContent, 
         setCurrentReferenceContent
     ] = useState<string | undefined>(undefined);
@@ -71,6 +80,8 @@ export const ChatContextProvider = ({ children }: { children: ReactNode }) => {
         setChatLoading,
         isSidebarOpen,
         setIsSidebarOpen,
+        directData,
+        setDirectData,
         currentReferenceContent,
         setCurrentReferenceContent,
     };

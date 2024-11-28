@@ -80,4 +80,8 @@ html, body {
   align-items: center;
 }
 
-
+.mysmr-drawer .MuiPaper-root{
+  background-color: var(--background2-color) !important;
+  display: flex;
+  justify-content: space-between;
+}
