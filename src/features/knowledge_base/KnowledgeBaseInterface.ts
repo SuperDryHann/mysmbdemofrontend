@@ -5,6 +5,10 @@ export interface KnowledgeBaseFile {
     status?: string;
 }
 
+export interface iKBFile {
+    file: KnowledgeBaseFile;
+  }
+
 export interface Url {
     url: string;
     status: string;

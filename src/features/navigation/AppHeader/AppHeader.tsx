@@ -1,10 +1,10 @@
 import { FC, useContext } from "react";
-import "./AHAppHeader.css";
+import "./AppHeader.css";
 import { Typography, Tooltip, IconButton } from "@mui/material";
-import GlobalContext from "../../features/global/GlobalContext";
+import GlobalContext from "../../global/GlobalContext";
 import FolderRoundedIcon from "@mui/icons-material/FolderRounded";
 
-const AHAppHeader: FC = () => {
+const AppHeader: FC = () => {
   const { worksheet, setWorksheet } = useContext(GlobalContext);
   const clickKnowledgeBase = async () => {
     switch (worksheet) {
@@ -42,4 +42,4 @@ const AHAppHeader: FC = () => {
   );
 };
 
-export default AHAppHeader;
+export default AppHeader;

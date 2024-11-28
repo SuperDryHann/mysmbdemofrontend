@@ -6,7 +6,7 @@ import {
   ListItemButton,
   IconButton,
 } from "@mui/material";
-import "./AHDrawer.css";
+import "./AppDrawer.css";
 import MuiDrawer from "@mui/material/Drawer";
 import { styled, Theme, CSSObject } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -82,7 +82,7 @@ const Drawer = styled(MuiDrawer, {
   ],
 }));
 
-const AHDrawer: FC<iDrawerProps> = ({ navigationMap }) => {
+const AppDrawer: FC<iDrawerProps> = ({ navigationMap }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -99,31 +99,28 @@ const AHDrawer: FC<iDrawerProps> = ({ navigationMap }) => {
       className="mysmr-drawer"
       style={{ zIndex: 99 }}
     >
-      <div>
-        <DrawerHeader>
-          {open ? (
-            <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
-          ) : (
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={[
-                {
-                  marginRight: -1,
-                },
-                open && { display: "none" },
-              ]}
-            >
-              <MenuIcon />
-            </IconButton>
-          )}
-        </DrawerHeader>
-        <Divider />
-      </div>
+      <DrawerHeader>
+        {open ? (
+          <IconButton onClick={handleDrawerClose}>
+            <ChevronLeftIcon />
+          </IconButton>
+        ) : (
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={[
+              {
+                marginRight: -1,
+              },
+              open && { display: "none" },
+            ]}
+          >
+            <MenuIcon />
+          </IconButton>
+        )}
+      </DrawerHeader>
       <List>
         {navigationMap.map((x) => (
           <ListItem key={x.title} disablePadding>
@@ -192,4 +189,4 @@ const AHDrawer: FC<iDrawerProps> = ({ navigationMap }) => {
   );
 };
 
-export default AHDrawer;
+export default AppDrawer;

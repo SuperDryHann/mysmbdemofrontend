@@ -5,10 +5,10 @@ import ApartmentRoundedIcon from "@mui/icons-material/ApartmentRounded";
 import "../global/Global.css";
 import "./Navigation.css";
 
-import { iDrawerNav } from "../../components/AHDrawer/AHDrawer";
-import AHDrawer from "../../components/AHDrawer/AHDrawer";
+import { iDrawerNav } from "./AppDrawer/AppDrawer";
+import AHDrawer from "./AppDrawer/AppDrawer";
 
-import AHAppHeader from "../../components/AHAppHeader/AHAppHeader";
+import AHAppHeader from "./AppHeader/AppHeader";
 
 export function Navigation({ children }: { children: ReactNode }) {
   const { worksheet, setWorksheet, setChatCase } = useContext(GlobalContext);
