@@ -1,4 +1,4 @@
-import './GlobalComponents.css'
+import './GlobalComponents.scss'
 
 export const GlobalLoadingImage = () => {
     return (

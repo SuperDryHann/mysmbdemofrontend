@@ -1,4 +1,5 @@
 import { FC, useContext, useEffect, useRef } from "react";
+import "./ChatLog.scss";
 import ReactMarkdown from "react-markdown";
 import ChatContext from "../ChatContext";
 import { CircularProgress } from "@mui/material";

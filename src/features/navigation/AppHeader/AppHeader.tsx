@@ -1,5 +1,5 @@
 import { FC, useContext } from "react";
-import "./AppHeader.css";
+import "./AppHeader.scss";
 import { Typography, Tooltip, IconButton } from "@mui/material";
 import GlobalContext from "../../global/GlobalContext";
 import FolderRoundedIcon from "@mui/icons-material/FolderRounded";

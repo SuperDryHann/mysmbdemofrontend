@@ -1,8 +1,8 @@
-import "./App.css";
+import "./App.scss";
 import { useContext } from "react";
 import Grid from "@mui/material/Grid";
 import GlobalContext from "./features/global/GlobalContext";
-import "./features/global/Global.css";
+import "./features/global/Global.scss";
 import Navigation from "./features/navigation/Navigation";
 import Chat from "./features/chat/Chat";
 import KnowledgeBase from "./features/knowledge_base/KnowledgeBase";

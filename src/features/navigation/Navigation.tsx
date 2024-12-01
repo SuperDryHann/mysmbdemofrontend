@@ -2,8 +2,8 @@ import { useContext, ReactNode } from "react";
 import GlobalContext from "../global/GlobalContext";
 import QuestionMarkRoundedIcon from "@mui/icons-material/QuestionMarkRounded";
 import ApartmentRoundedIcon from "@mui/icons-material/ApartmentRounded";
-import "../global/Global.css";
-import "./Navigation.css";
+import "../global/Global.scss";
+import "./Navigation.scss";
 
 import { iDrawerNav } from "./AppDrawer/AppDrawer";
 import AHDrawer from "./AppDrawer/AppDrawer";

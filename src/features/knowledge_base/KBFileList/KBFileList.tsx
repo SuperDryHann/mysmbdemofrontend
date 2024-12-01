@@ -1,4 +1,5 @@
-import React, { FC, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
+import './KBFileList.scss';
 import {
   List,
   ListItem,

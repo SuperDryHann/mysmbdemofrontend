@@ -1,4 +1,5 @@
 import { FC, useContext } from "react";
+import './ReferenceButton.scss';
 import ChatContext from "../../ChatContext";
 interface iReferenceButton {
   index: number;

@@ -1,5 +1,5 @@
 import React from "react";
-import "./KBActionButtons.css";
+import "./KBActionButtons.scss";
 import AddFileButton from "./AddFileButton/AddFileButton";
 import BuildKnowledgeBaseButton from "./BuildKnowledgeBaseButton/BuildKnowledgeBaseButton";
 

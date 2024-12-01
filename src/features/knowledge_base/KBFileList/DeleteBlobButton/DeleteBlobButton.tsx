@@ -1,4 +1,5 @@
 import React, { FC, useContext } from "react";
+import './DeleteBlobButton.scss'
 import { KnowledgeBaseFile } from "../../KnowledgeBaseInterface";
 import KnowledgeBaseContext from "../../KnowledgeBaseContext";
 import { IconButton } from "@mui/material";

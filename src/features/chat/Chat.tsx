@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useRef } from "react";
-import "./Chat.css";
+import "./Chat.scss";
 import { Message } from "./ChatInterface";
 import ChatContext from "./ChatContext";
 import { app, authentication } from "@microsoft/teams-js";

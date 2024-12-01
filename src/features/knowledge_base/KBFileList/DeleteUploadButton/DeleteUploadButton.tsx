@@ -1,4 +1,5 @@
 import React, { FC, useContext } from "react";
+import "./DeleteUploadButton.scss";
 import { KnowledgeBaseFile } from "../../KnowledgeBaseInterface";
 import KnowledgeBaseContext from "../../KnowledgeBaseContext";
 import { iKBFile } from "../../KnowledgeBaseInterface";

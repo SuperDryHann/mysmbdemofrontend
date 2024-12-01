@@ -1,5 +1,5 @@
 import { FC, useContext } from "react";
-import "./MessageInput.css";
+import "./MessageInput.scss";
 import globalContext from "../../global/GlobalContext";
 import ChatContext from "../ChatContext";
 

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useContext } from "react";
 import KnowledgeBaseContext from "./KnowledgeBaseContext";
-import "../global/Global.css";
+import "../global/Global.scss";
 import useAxiosToBackend from "../auth/useAxiosToBackend";
-import "./KnowledgeBase.css";
+import "./KnowledgeBase.scss";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Typography } from "@mui/material";

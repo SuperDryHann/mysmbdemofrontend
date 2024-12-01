@@ -1,12 +1,11 @@
 import React, { FC, createElement } from "react";
 import {
   List,
-  Divider,
   ListItem,
   ListItemButton,
   IconButton,
 } from "@mui/material";
-import "./AppDrawer.css";
+import "./AppDrawer.scss";
 import MuiDrawer from "@mui/material/Drawer";
 import { styled, Theme, CSSObject } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";

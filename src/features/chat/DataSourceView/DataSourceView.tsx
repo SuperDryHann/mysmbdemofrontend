@@ -1,4 +1,5 @@
 import { FC, useContext } from "react";
+import "./DataSourceView.scss";
 import ReactMarkdown from "react-markdown";
 import ChatContext from "../ChatContext";
 import { Drawer } from "@mui/material";

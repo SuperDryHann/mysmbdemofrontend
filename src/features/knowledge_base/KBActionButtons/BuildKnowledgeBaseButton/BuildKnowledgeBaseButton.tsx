@@ -1,4 +1,5 @@
 import React, { FC, useContext } from "react";
+import "./BuildKnowledgeBaseButton.scss";
 import GlobalContext from "../../../global/GlobalContext";
 import KnowledgeBaseContext from "../../KnowledgeBaseContext";
 import { Button } from "@mui/material";
