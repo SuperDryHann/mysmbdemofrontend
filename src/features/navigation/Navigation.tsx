@@ -49,24 +49,64 @@ export function Navigation({ children }: { children: ReactNode }) {
     //   onclick: clickBIChat,
     //   iconColor: worksheet === 'bi_chat' ? 'var(--component3-color)' : 'var(--primary-color)',
     // },
+    // {
+    //   title: "Ask myCompany",
+    //   icon: ApartmentRoundedIcon,
+    //   onclick: clickCompanyChat,
+    //   iconColor:
+    //     worksheet === "company_chat" || worksheet === "company_knowledge_base"
+    //       ? "var(--component3-color)"
+    //       : "var(--primary-color)",
+    // },
+    // {
+    //   title: "Ask mySMB",
+    //   icon: QuestionMarkRoundedIcon,
+    //   onclick: clickCustomerServiceChat,
+    //   iconColor:
+    //     worksheet === "customer_service_chat" ||
+    //     worksheet === "customer_service_knowledge_base"
+    //       ? "var(--component3-color)"
+    //       : "var(--primary-color)",
+    // },
     {
       title: "Ask myCompany",
-      icon: ApartmentRoundedIcon,
+      icon: (
+        <i
+          className="material-icons"
+          style={{
+            color:
+              worksheet === "company_chat" ||
+              worksheet === "company_knowledge_base"
+                ? "var(--component3-color)"
+                : "var(--primary-color)",
+            fontSize: "var(--icon-size)",
+            marginBottom: 0,
+          }}
+        >
+          apartment
+        </i>
+      ),
       onclick: clickCompanyChat,
-      iconColor:
-        worksheet === "company_chat" || worksheet === "company_knowledge_base"
-          ? "var(--component3-color)"
-          : "var(--primary-color)",
     },
     {
       title: "Ask mySMB",
-      icon: QuestionMarkRoundedIcon,
+      icon: (
+        <i
+          className="material-icons"
+          style={{
+            color:
+              worksheet === "customer_service_chat" ||
+              worksheet === "customer_service_knowledge_base"
+                ? "var(--component3-color)"
+                : "var(--primary-color)",
+            fontSize: "var(--icon-size)",
+            marginBottom: 0,
+          }}
+        >
+          question_mark
+        </i>
+      ),
       onclick: clickCustomerServiceChat,
-      iconColor:
-        worksheet === "customer_service_chat" ||
-        worksheet === "customer_service_knowledge_base"
-          ? "var(--component3-color)"
-          : "var(--primary-color)",
     },
   ] as iDrawerNav[];
 
@@ -78,11 +118,13 @@ export function Navigation({ children }: { children: ReactNode }) {
       {/* Side Navigation */}
       <header className="sidebar-header"></header>
 
-      {/* drawer side bar */}
-      <AHDrawer navigationMap={navigationMap} />
+      <div className="mysmb-container">
+        {/* drawer side bar */}
+        <AHDrawer navigationMap={navigationMap} />
 
-      {/* Main Content */}
-      <main className="content">{children}</main>
+        {/* Main Content */}
+        <main className="content">{children}</main>
+      </div>
     </div>
   );
 }

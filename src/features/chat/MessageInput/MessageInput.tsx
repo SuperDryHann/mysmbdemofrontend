@@ -42,7 +42,9 @@ const MessageInput: FC<MessageInputProps> = ({ onSend }) => {
       <div className="chat-action-btn">
         <Chip
           color={directData ? "primary" : undefined}
-          icon={<LanguageIcon fontSize="small" />}
+          className={!directData ? "direct-data-default" : ""}
+          // icon={<LanguageIcon fontSize="small" />}
+          icon={<i className="material-icons">language</i>}
           label={directData ? "Search" : undefined}
           variant="outlined"
           onClick={() => setDirectData(!directData)}

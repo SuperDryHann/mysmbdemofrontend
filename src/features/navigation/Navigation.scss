@@ -10,14 +10,15 @@ html, body {
 
 /* App container with grid layout */
 .navigation {
-  display: grid;
-  grid-template-rows: var(--height-appbar) 1fr;
-  grid-template-columns: var(--width-sidebar) 1fr;
-  grid-template-areas: 
-    "sidebar-header appbar"
-    "sidebar content-shell";
-  height: 100vh;
-  width: 100vw;
+  width: 100%;
+  // display: grid;
+  // grid-template-rows: var(--height-appbar) 1fr;
+  // grid-template-columns: var(--width-sidebar) 1fr;
+  // grid-template-areas: 
+  //   "sidebar-header appbar"
+  //   "sidebar content-shell";
+  // height: 100vh;
+  // width: 100vw;
 }
 
 .navigation::before {
@@ -80,8 +81,6 @@ html, body {
   align-items: center;
 }
 
-.mysmr-drawer .MuiPaper-root{
-  background-color: var(--background2-color) !important;
+.mysmb-container {
   display: flex;
-  justify-content: space-between;
 }

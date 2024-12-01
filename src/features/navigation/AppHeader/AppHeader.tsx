@@ -28,14 +28,15 @@ const AppHeader: FC = () => {
         placement="right"
       >
         <IconButton onClick={clickKnowledgeBase}>
-          <FolderRoundedIcon
+          {/* <FolderRoundedIcon
             sx={{
               color: worksheet.includes("knowledge_base")
                 ? "var(--component3-color)"
                 : "var(--primary-color)",
               fontSize: "var(--icon-size)",
             }}
-          />
+          /> */}
+          <i className="material-icons" style={{fontSize: "var(--icon-size)"}}>folder</i>
         </IconButton>
       </Tooltip>
     </header>

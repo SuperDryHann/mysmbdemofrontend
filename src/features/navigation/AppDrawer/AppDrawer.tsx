@@ -91,17 +91,23 @@ const AppDrawer: FC<iDrawerProps> = ({ navigationMap }) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  // 
+  // <i className="material-icons">cloud</i>
+  // <i className="material-icons" style={{fontSize: "48px"}}>cloud</i>
+  // <i className="material-icons" style={{fontSize: "60px", color: 'red'}}>cloud</i>
   return (
     <Drawer
       variant="permanent"
       open={open}
-      className="mysmr-drawer"
+      className="mysmb-drawer"
       style={{ zIndex: 99 }}
     >
       <DrawerHeader>
         {open ? (
           <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
+            {/* <ChevronLeftIcon /> */}
+
+            <i className="material-icons">chevron_left</i>
           </IconButton>
         ) : (
           <IconButton
@@ -116,7 +122,9 @@ const AppDrawer: FC<iDrawerProps> = ({ navigationMap }) => {
               open && { display: "none" },
             ]}
           >
-            <MenuIcon />
+            {/* <MenuIcon /> */}
+
+            <i className="material-icons">menu</i>
           </IconButton>
         )}
       </DrawerHeader>
@@ -154,13 +162,13 @@ const AppDrawer: FC<iDrawerProps> = ({ navigationMap }) => {
                       },
                 ]}
               >
-                {createElement(x.icon, {
+                {x.iconColor ? createElement(x.icon, {
                   sx: {
                     color: x.iconColor,
                     fontSize: "var(--icon-size)",
                     mb: 0,
                   },
-                })}
+                }) : x.icon}
               </ListItemIcon>
               {open && (
                 <ListItemText

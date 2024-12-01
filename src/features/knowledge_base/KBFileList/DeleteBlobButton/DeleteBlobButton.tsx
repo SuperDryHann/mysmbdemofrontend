@@ -21,9 +21,10 @@ const DeleteBlobButton: FC<iKBFile> = ({ file }) => {
 
   return (
     <IconButton onClick={() => handleDelete(file)} size="large">
-      <DeleteRoundedIcon
+      <i className="material-icons" style={{ fontSize: "var(--icon-size-small)", color: "var(--text1-color)" }}>delete</i>
+      {/* <DeleteRoundedIcon
         sx={{ fontSize: "var(--icon-size-small)", color: "var(--text1-color)" }}
-      />
+      /> */}
     </IconButton>
   );
 };

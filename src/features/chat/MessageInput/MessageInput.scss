@@ -69,3 +69,9 @@
 .MuiChip-label:empty {
   display: none;
 }
+
+.direct-data-default {
+  .material-icons {
+    margin-left: -5px !important;
+  }
+}

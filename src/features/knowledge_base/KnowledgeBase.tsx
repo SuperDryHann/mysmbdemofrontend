@@ -113,7 +113,7 @@ const KnowledgeBase: React.FC = () => {
         sx={{
           color: "#fff",
           zIndex: 10,
-          position: "absolute",
+          position: "fixed",
           backgroundColor: "rgba(255, 255, 255, 0.5)",
         }}
         open={indexerStatus?.status === "running" || knowledgeBaseLoading}

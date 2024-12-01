@@ -1,0 +1,18 @@
+/* Chat log */
+/* Chat log fills available space */
+.chat-log {
+  flex: 1;
+  display: flex;
+  max-height: 80%;
+  overflow-x: auto;
+}
+
+.chat-log-narrow {
+  width: 70%;
+  margin: 0 auto; /* Center the chat-log-narrow within its parent */
+  flex: none;     /* Prevent it from stretching */
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
