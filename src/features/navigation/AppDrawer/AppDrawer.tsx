@@ -92,9 +92,9 @@ const AppDrawer: FC<iDrawerProps> = ({ navigationMap }) => {
     setOpen(false);
   };
   // 
-  // <i className="material-icons">cloud</i>
-  // <i className="material-icons" style={{fontSize: "48px"}}>cloud</i>
-  // <i className="material-icons" style={{fontSize: "60px", color: 'red'}}>cloud</i>
+  // <i className="material-symbols-outlined">cloud</i>
+  // <i className="material-symbols-outlined" style={{fontSize: "48px"}}>cloud</i>
+  // <i className="material-symbols-outlined" style={{fontSize: "60px", color: 'red'}}>cloud</i>
   return (
     <Drawer
       variant="permanent"
@@ -107,7 +107,7 @@ const AppDrawer: FC<iDrawerProps> = ({ navigationMap }) => {
           <IconButton onClick={handleDrawerClose}>
             {/* <ChevronLeftIcon /> */}
 
-            <i className="material-icons">chevron_left</i>
+            <i className="material-symbols-outlined">chevron_left</i>
           </IconButton>
         ) : (
           <IconButton
@@ -124,7 +124,7 @@ const AppDrawer: FC<iDrawerProps> = ({ navigationMap }) => {
           >
             {/* <MenuIcon /> */}
 
-            <i className="material-icons">menu</i>
+            <i className="material-symbols-outlined">menu</i>
           </IconButton>
         )}
       </DrawerHeader>

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import KnowledgeBaseContext from "../../KnowledgeBaseContext";
 import { KnowledgeBaseFile } from "../../KnowledgeBaseInterface";
 import { Button } from "@mui/material";
-import './AddFileButton.scss';
+import "./AddFileButton.scss";
 
 const AddFileButton: React.FC = () => {
   const { setUploadFiles, setFiles } = useContext(KnowledgeBaseContext);

@@ -44,7 +44,7 @@ const MessageInput: FC<MessageInputProps> = ({ onSend }) => {
           color={directData ? "primary" : undefined}
           className={!directData ? "direct-data-default" : ""}
           // icon={<LanguageIcon fontSize="small" />}
-          icon={<i className="material-icons">language</i>}
+          icon={<i className="material-symbols-outlined">language</i>}
           label={directData ? "Search" : undefined}
           variant="outlined"
           onClick={() => setDirectData(!directData)}

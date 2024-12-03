@@ -1,12 +1,12 @@
-@import url('../global/Global.scss');
+@import url("../global/Global.scss");
 
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
 }
-
 
 /* App container with grid layout */
 .navigation {
@@ -14,7 +14,7 @@ html, body {
   // display: grid;
   // grid-template-rows: var(--height-appbar) 1fr;
   // grid-template-columns: var(--width-sidebar) 1fr;
-  // grid-template-areas: 
+  // grid-template-areas:
   //   "sidebar-header appbar"
   //   "sidebar content-shell";
   // height: 100vh;

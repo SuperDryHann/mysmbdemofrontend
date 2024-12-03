@@ -7,7 +7,7 @@ export interface KnowledgeBaseFile {
 
 export interface iKBFile {
     file: KnowledgeBaseFile;
-  }
+}
 
 export interface Url {
     url: string;
@@ -20,15 +20,3 @@ export interface IndexerStatus {
     last_upadated?: string;
     time_difference?: string;
 }
-
-// export interface IndexerStatusLastResult {
-//     end_time: string;
-//     error:[];
-//     failed_item_count: number;
-//     final_tracking_state: string;
-//     initial_tracking_state: string;
-//     item_count: number;
-//     start_time: string;
-//     status: string;
-//     warning: [];
-// }

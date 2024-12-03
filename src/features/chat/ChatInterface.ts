@@ -8,9 +8,9 @@ export interface Message {
     id: number;
     text: string;
     sender: 'user' | 'bot';
-    references?: Reference[]; 
+    references?: Reference[];
 }
 
 export interface MessageInputProps {
     onSend: (messageText: string) => void;
-  }
+}

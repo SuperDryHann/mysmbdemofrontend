@@ -1,7 +1,8 @@
 import { useContext, ReactNode } from "react";
 import GlobalContext from "../global/GlobalContext";
-import QuestionMarkRoundedIcon from "@mui/icons-material/QuestionMarkRounded";
-import ApartmentRoundedIcon from "@mui/icons-material/ApartmentRounded";
+// import QuestionMarkRoundedIcon from "@mui/icons-material/QuestionMarkRounded";
+// import ApartmentRoundedIcon from "@mui/icons-material/ApartmentRounded";
+// import Button from '@mui/material/Button';
 import "../global/Global.scss";
 import "./Navigation.scss";
 
@@ -72,7 +73,7 @@ export function Navigation({ children }: { children: ReactNode }) {
       title: "Ask myCompany",
       icon: (
         <i
-          className="material-icons"
+          className="material-symbols-outlined"
           style={{
             color:
               worksheet === "company_chat" ||
@@ -92,7 +93,7 @@ export function Navigation({ children }: { children: ReactNode }) {
       title: "Ask mySMB",
       icon: (
         <i
-          className="material-icons"
+          className="material-symbols-outlined"
           style={{
             color:
               worksheet === "customer_service_chat" ||

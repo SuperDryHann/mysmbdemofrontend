@@ -1,42 +1,45 @@
-@import url('../global/Global.scss');
+@import url("../global/Global.scss");
 
 .global-loading {
-    font-size: 70px;
-    font-weight: bold;
-    text-align: center;
-    color: #767575; /* Dark grey text */
-    position: relative;
-    overflow: hidden; /* Hide overflow to keep the animation within the text */
+  font-size: 70px;
+  font-weight: bold;
+  text-align: center;
+  color: #767575; /* Dark grey text */
+  position: relative;
+  overflow: hidden; /* Hide overflow to keep the animation within the text */
 }
 
 .global-loading::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0%; /* Start the gradient off-screen */
-    right: 100%;
-    width: 120%;
-    height: 120%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, transparent 80%);
-    transform: translateX(0%);
-    animation: shine 3s infinite;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0%; /* Start the gradient off-screen */
+  right: 100%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.6) 0%,
+    transparent 80%
+  );
+  transform: translateX(0%);
+  animation: shine 3s infinite;
 }
 
 @keyframes shine {
-    from {
-        transform: translateX(-100%);
-
-    }
-    to {
-        transform: translateX(100%); /* Move the gradient across the text */
-    }
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%); /* Move the gradient across the text */
+  }
 }
 
 .global-loading-background {
-    background-color: var(--background1-color);
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: var(--background1-color);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

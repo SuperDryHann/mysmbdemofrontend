@@ -36,7 +36,7 @@ const AppHeader: FC = () => {
               fontSize: "var(--icon-size)",
             }}
           /> */}
-          <i className="material-icons" style={{fontSize: "var(--icon-size)"}}>folder</i>
+          <i className="material-symbols-outlined" style={{fontSize: "var(--icon-size)"}}>folder</i>
         </IconButton>
       </Tooltip>
     </header>

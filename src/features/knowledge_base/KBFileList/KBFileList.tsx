@@ -13,7 +13,7 @@ import useAxiosToBackend from "../../auth/useAxiosToBackend";
 import { KnowledgeBaseFile } from "../KnowledgeBaseInterface";
 import RemoveCircleOutlineRoundedIcon from "@mui/icons-material/RemoveCircleOutlineRounded";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
-import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
+// import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import DeleteBlobButton from "./DeleteBlobButton/DeleteBlobButton";
 import DeleteUploadButton from "./DeleteUploadButton/DeleteUploadButton";
 import UndoButton from "./UndoButton/UndoButton";
@@ -61,9 +61,15 @@ const KBFileList: React.FC = () => {
         />
       );
     return (
-      <ArticleOutlinedIcon
-        sx={{ fontSize: "var(--icon-size-small)", color: "var(--text1-color)" }}
-      />
+      <i
+        className="material-symbols-outlined"
+        style={{
+          fontSize: "var(--icon-size-small)",
+          color: "var(--text1-color)",
+        }}
+      >
+        article
+      </i>
     );
   };
 

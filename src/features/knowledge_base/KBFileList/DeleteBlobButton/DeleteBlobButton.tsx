@@ -3,7 +3,7 @@ import './DeleteBlobButton.scss'
 import { KnowledgeBaseFile } from "../../KnowledgeBaseInterface";
 import KnowledgeBaseContext from "../../KnowledgeBaseContext";
 import { IconButton } from "@mui/material";
-import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+// import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import { iKBFile } from "../../KnowledgeBaseInterface";
 
 const DeleteBlobButton: FC<iKBFile> = ({ file }) => {
@@ -21,7 +21,7 @@ const DeleteBlobButton: FC<iKBFile> = ({ file }) => {
 
   return (
     <IconButton onClick={() => handleDelete(file)} size="large">
-      <i className="material-icons" style={{ fontSize: "var(--icon-size-small)", color: "var(--text1-color)" }}>delete</i>
+      <i className="material-symbols-outlined" style={{ fontSize: "var(--icon-size-small)", color: "var(--text1-color)" }}>delete</i>
       {/* <DeleteRoundedIcon
         sx={{ fontSize: "var(--icon-size-small)", color: "var(--text1-color)" }}
       /> */}

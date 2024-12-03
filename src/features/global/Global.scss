@@ -1,7 +1,7 @@
 /* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Oswald&display=swap');
-@import url('https://fonts.cdnfonts.com/css/sega-logo-font');
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Oswald&display=swap");
+@import url("https://fonts.cdnfonts.com/css/sega-logo-font");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap");
 
 * {
   font-family: "Nunito Sans", sans-serif;
@@ -11,28 +11,24 @@
   font-family: 'SEGA LOGO FONT', sans-serif;
 } */
 
-
-
 /* Colors */
 :root {
   --background1-color: rgb(255, 255, 255);
   --background2-color: rgb(245, 244, 241);
   --background3-color: rgb(237, 253, 249);
   --border-color: rgb(220, 220, 220);
-  --component1-color : rgb(188, 255, 242); /* Define your color variable */
-  --component2-color : rgb(33, 214, 214);
-  --component3-color : rgb(167, 166, 226);
-  --component-opacity-color: rgba(222,220,217,0.6);
+  --component1-color: rgb(188, 255, 242); /* Define your color variable */
+  --component2-color: rgb(33, 214, 214);
+  --component3-color: rgb(167, 166, 226);
+  --component-opacity-color: rgba(222, 220, 217, 0.6);
   --text1-color: rgb(33, 36, 40);
   --text2-color: rgb(108, 117, 125);
-   /* Define your color variable */
+  /* Define your color variable */
   --yes-color: rgb(30, 189, 80);
   --confirmed1-color: rgb(255, 218, 23, 0.1);
   --confirmed2-color: rgb(255, 218, 23, 0.05);
   --no-color: rgb(250, 102, 107);
 }
-
-
 
 /* Sizes */
 :root {
@@ -41,5 +37,5 @@
   --height-appbar: 40px;
   --height-main: calc(100vh - var(--height-appbar));
   --width-sidebar: 40px;
-  --width-main: calc(100vw - var(--width-sidebar));;
+  --width-main: calc(100vw - var(--width-sidebar));
 }
